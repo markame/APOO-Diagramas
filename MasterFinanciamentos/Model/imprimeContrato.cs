@@ -4,35 +4,45 @@ using System.Text;
 
 namespace MasterFinanciamentos.Model
 {
-    public class imprimeContrato
+    public class ImprimeContrato
     {
-         static private DateTime data = DateTime.Now.Date;
+        private DateTime data = DateTime.Now;
 
-    public imprimeContrato(Financiamento financiamento, Carro carro, Cliente cliente)
+        public ImprimeContrato(Cliente cliente, Carro carro, Financiamento financiamento)
         {
-           string contrato = $"Contrato de Financiamento\n\n" +
-                $"Data: {data.ToShortDateString()}\n\n" +
-                $"Cliente: {cliente.Nome}\n" +
+            string contrato = $"Contrato de Financiamento\n\n" +
+                $"Cliente:\n" +
+                $"Nome: {cliente.Nome}\n" +
                 $"CPF: {cliente.Cpf}\n" +
-                $"Data de Nascimento: {cliente.DataNascimento.ToShortDateString()}\n" +
-                $"Endereço: {cliente.Endereco}\n" +
-                $"Telefone: {cliente.Telefone}\n\n" +
-                $"Carro: {carro.Marca} {carro.Modelo}\n" +
+                $"Telefone: {cliente.Telefone}\n" +
+                $"Endereço: {cliente.Endereco}\n\n" +
+                $"Carro:\n" +
+                $"Modelo: {carro.Modelo}\n" +
+                $"Marca: {carro.Marca}\n" +
                 $"Chassi: {carro.Chassi}\n" +
                 $"Cor: {carro.Cor}\n\n" +
-                $"Valor do Financiamento: R$ {financiamento.Valor:F2}\n" +
-                $"Juros: {financiamento.Juros}%\n"+"assinatura:\n"+"________________________";
+                $"Financiamento:\n" +
+                $"Data do Financiamento: {financiamento.DataFinanciamento.ToShortDateString()}\n" +
+                $"Valor: R$ {financiamento.Valor:F2}\n" +
+                $"Juros: {financiamento.Juros}%\n"+
+                "Assinatura:\n"+"_______________________________\n"+
+                $"Data: {data.ToShortDateString()}\n\n";
+           Imprimir(contrato);
+        }
+        protected void Imprimir(string contrato)
+        {
             try
             {
-                StreamWriter sw = new StreamWriter("C:\\Users\\Marcos\\Desktop\\contrato\\contrato.txt");
+                string pathFile = @"C:\\Users\\Marcos\\Desktop\\contrato\\contratoFinanciamento.txt";
+                StreamWriter sw = new StreamWriter(pathFile);
                 sw.WriteLine(contrato);
                 sw.Close();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine( ex.ToString() ); 
             }
         }
+            
     }
-
 }

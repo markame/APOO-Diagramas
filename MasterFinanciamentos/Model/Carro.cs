@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -8,13 +7,11 @@ namespace MasterFinanciamentos.Model
 {
     public class Carro
     {
-        private int id;
         private string modelo;
         private string marca;
         private string chassi;
         private string cor;
 
-        public int Id { get => id; set => id = value; }
         public string Modelo { get => modelo; set => modelo = value; }
         public string Marca { get => marca; set => marca = value; }
         public string Chassi { get => chassi; set => chassi = value; }
@@ -22,8 +19,10 @@ namespace MasterFinanciamentos.Model
 
         public string jsonConvert(Carro carro)
         {
-            string json = JsonConvert.SerializeObject(carro);
+           string json = JsonConvert.SerializeObject(carro);
             return json;
         }
-    }
+            
+            
+     }
 }
